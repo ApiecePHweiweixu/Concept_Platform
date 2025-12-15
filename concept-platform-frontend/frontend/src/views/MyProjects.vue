@@ -164,6 +164,7 @@ const handleViewFeedback = async (row) => {
     // 状态9（驳回）直接显示 row 中的 rejectReason
     try {
       const res = await getProjectReviews(row.id || row.projectId)
+      console.log('获取到的评审列表:', res) // 增加日志
       if (Array.isArray(res)) {
         reviewList.value = res
       } else if (res && Array.isArray(res.list)) {

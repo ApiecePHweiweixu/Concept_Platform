@@ -9,12 +9,17 @@ const router = createRouter({
       component: () => import('../views/LoginView.vue')
     },
     {
+      path: '/register',
+      name: 'register',
+      component: () => import('../views/RegisterView.vue')
+    },
+    {
       path: '/',
       component: () => import('../layout/MainLayout.vue'),
       children: [
         {
-          path: '', // 默认首页跳转逻辑，稍后可以优化，暂时跳到 my-projects
-          redirect: '/my-projects' 
+          path: '', // 默认首页跳转逻辑
+          redirect: '/my-projects'
         },
         {
           path: 'my-projects',
@@ -41,9 +46,9 @@ const router = createRouter({
   ],
 })
 
-// 简单的路由守卫，如果未登录则跳转到登录页（可选，用户未明确要求但通常需要）
+// 路由守卫
 router.beforeEach((to, from, next) => {
-  const publicPages = ['/login'];
+  const publicPages = ['/login', '/register']; // 添加 /register 到白名单
   const authRequired = !publicPages.includes(to.path);
   const loggedIn = localStorage.getItem('user');
 

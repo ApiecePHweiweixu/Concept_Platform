@@ -176,12 +176,20 @@ const submit = async () => {
   
   await formRef.value.validate(async (valid) => {
     if (valid) {
+      // 构造符合后端 DTO 的数据结构
+      const submitData = {
+        reviewId: form.reviewId,
+        projectId: form.projectId,
+        score: form.score,
+        comments: form.comment // 强制映射：前端 comment -> 后端 comments (复数)
+      }
+
       // 调试：打印提交数据
-      console.log('提交评审数据:', form)
+      console.log('提交评审数据:', submitData)
 
       submitting.value = true
       try {
-        await submitReview(form)
+        await submitReview(submitData)
         ElMessage.success('评审提交成功')
         dialogVisible.value = false
         fetchData() // 刷新列表

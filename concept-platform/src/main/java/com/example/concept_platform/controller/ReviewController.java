@@ -39,7 +39,6 @@ public class ReviewController {
     // Get My Reviews (Expert) - with Project Details
     @GetMapping("/list")
     public Result<List<ReviewVO>> listMyReviews(@RequestParam Integer expertId) {
-        // Ideally get expertId from session, here we pass it as param for simplicity
         return Result.success(reviewService.getReviewListByExpert(expertId));
     }
 
@@ -64,6 +63,7 @@ public class ReviewController {
         if (dto.getReviewId() == null || dto.getScore() == null) {
             return Result.error("Review ID and Score are required");
         }
+        // Ensure comments is passed
         return Result.success(reviewService.submitReview(dto.getReviewId(), dto.getScore(), dto.getComments()));
     }
 
@@ -88,6 +88,6 @@ public class ReviewController {
     public static class SubmitReviewDto {
         private Integer reviewId;
         private Integer score;
-        private String comments;
+        private String comments; // Confirmed field name is comments
     }
 }

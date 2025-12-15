@@ -14,7 +14,12 @@
           <el-input v-model="form.password" type="password" placeholder="请输入密码" show-password @keyup.enter="handleLogin" />
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" class="login-button" :loading="loading" @click="handleLogin">登录</el-button>
+          <div style="width: 100%;">
+            <el-button type="primary" class="login-button" :loading="loading" @click="handleLogin">登录</el-button>
+            <div style="text-align: right; margin-top: 10px;">
+              <el-link type="primary" @click="handleRegister">没有账号？立即注册</el-link>
+            </div>
+          </div>
         </el-form-item>
       </el-form>
     </el-card>
@@ -39,6 +44,11 @@ const form = reactive({
 const rules = {
   username: [{ required: true, message: '请输入账号', trigger: 'blur' }],
   password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
+}
+
+const handleRegister = () => {
+  console.log('跳转注册页...') // 方便调试
+  router.push('/register')
 }
 
 const handleLogin = async () => {
@@ -105,4 +115,3 @@ const handleLogin = async () => {
   width: 100%;
 }
 </style>
-
