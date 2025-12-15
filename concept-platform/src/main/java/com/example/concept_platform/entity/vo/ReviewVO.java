@@ -1,6 +1,7 @@
 package com.example.concept_platform.entity.vo;
 
 import lombok.Data;
+import java.time.LocalDateTime;
 
 @Data
 public class ReviewVO {
@@ -9,8 +10,9 @@ public class ReviewVO {
     private String projectName;
     private String applicantName;
     private String techDomain;
-    private String attachmentUrl; // Added attachment URL
+    private String attachmentUrl;
     private Integer status; // 0-Not Reviewed, 1-Reviewed
     private Integer score;
     private String comments;
+    private LocalDateTime reviewTime;
 }
